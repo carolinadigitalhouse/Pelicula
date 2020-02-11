@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 public class Pelicula {
@@ -22,8 +23,10 @@ public class Pelicula {
 
     private double rating;
     
+    private Long random_num;
+    
 
-    public void setId(Long id) {
+	public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,6 +58,14 @@ public class Pelicula {
 	public void setRating(double rating) {
 		this.rating = rating;
 	}
+
+	 public Long getRandom_num() {
+			return random_num;
+		}
+
+	public void setRandom_num(Long random_num) {
+			this.random_num = random_num;
+		}
 
 }
 

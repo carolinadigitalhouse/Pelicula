@@ -19,6 +19,7 @@ public class PeliculaServiceImpl implements PeliculaService{
 	@Override
 	public boolean agregar(Pelicula peli){
 		if (checkTituloAvailable(peli)) {
+			peli.setRandom_num(Math.round(Math.random() * 99999999));
 			peliculaRepository.save(peli);
 		}
 		return true;
@@ -50,7 +51,7 @@ public class PeliculaServiceImpl implements PeliculaService{
 
 	private boolean checkTituloAvailable(Pelicula peli){
 		Pelicula peliFound = peliculaRepository.findTituloIs(peli.getTitulo()); // optional por el null
-		if (peliFound!=null) {
+		if (peliFound != null) {
 			return false;
 		}
 		return true;
