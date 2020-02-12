@@ -33,7 +33,10 @@ public interface PeliculaRepository extends CrudRepository<Pelicula, Long> {
 	List<Pelicula> findRatingLessThanEqual(double rating);
 	
 	@Query("select p from Pelicula p where p.titulo = ?1")
-	Pelicula findTituloIs(String titulo);	
+	Pelicula findTituloIs(String titulo);
+	
+	@Query("select p from Pelicula p where p.titulo like %?1%")
+	Pelicula findTituloIs2(String titulo);
 	
 	@Query("select p from Pelicula p where p.categoria not like %?1%")
 	List<Pelicula> findCategoriaNotLike(String categoria);

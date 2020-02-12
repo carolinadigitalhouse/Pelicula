@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="utf-8">
+<title>Resultado Busqueda</title>
 </head>
 <body>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="static/css/style.css"
 	th:href="@{/css/style.css}">
 
-<title>Buscar Pel�cula</title>
+<title>Buscar Película</title>
 </head>
 <body class="down_btn">
 
@@ -20,10 +20,10 @@
 		<a href="/pelicula/" th:href="@{/pelicula/}">Home</a>
 	</div>
 
-	<h1>Pel�cula</h1>
+	<h1>Pelï¿½cula</h1>
 	<div class="form text_field ">
 		<form action="home" th:action="@{/pelicula/editar}" th:object="${movieEncontrada}" method="post">
-	<input type="hidden" th:field="*{id}" />
+		<input type="hidden" th:field="*{id}" />
 			<label>Titulo:</label>
 			<input type="text" th:field="*{titulo}" /> <br>
 			<label>Categoria</label>
@@ -31,7 +31,7 @@
 			<label>Rating</label>
 			<input type="text" th:field="*{rating}" /> <br>
 			<label>Numero Random</label>
-			<p th:text="*{random_num}"></p>
+			<input type="text" th:field="*{random_num}" />
 			<br> <br>
 		<input type="submit" value="Editar">
 	</form>

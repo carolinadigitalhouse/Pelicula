@@ -19,7 +19,7 @@ public class PeliculaServiceImpl implements PeliculaService{
 	@Override
 	public boolean agregar(Pelicula peli){
 		if (checkTituloAvailable(peli)) {
-			peli.setRandom_num(Math.round(Math.random() * 99999999));
+			generadorNumeroRandom(peli);
 			peliculaRepository.save(peli);
 		}
 		return true;
@@ -28,13 +28,16 @@ public class PeliculaServiceImpl implements PeliculaService{
 	@Override
 	public boolean editarPelicula(Pelicula movie) {
 		//puedo editar una pelicula asi sin validar?
-		peliculaRepository.save(movie);
-		return false;
+		if(checkEdicionCorrecta(movie)){
+			peliculaRepository.save(movie);
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override
 	public Pelicula buscarPelicula(Long id)  throws Exception{
-		// TODO Auto-generated method stub
 		Optional<Pelicula> pelicula= peliculaRepository.findById(id);
 		if (pelicula.isPresent()) {
 			throw new Exception("pelicula no disponible");
@@ -55,5 +58,18 @@ public class PeliculaServiceImpl implements PeliculaService{
 			return false;
 		}
 		return true;
-	}	
+	}
+	private void generadorNumeroRandom(Pelicula peli) {
+		peli.setRandom_num(Math.round(Math.random() * 99999999));
+	}
+	private boolean checkEdicionCorrecta(Pelicula peliModificada){
+		// Otra posible forma de traer el objeto pelicula original de la base de datos
+		//Pelicula pelicula = peliculaRepository.findTituloIs(peli1.getTitulo());
+		Pelicula peliOriginal = peliculaRepository.findById(peliModificada.getId()).get();
+		Long a = peliModificada.getRandom_num();
+		Long b = peliOriginal.getRandom_num();
+		boolean resultado = (a.equals(b)) ? true: false;
+		return resultado;
+
+	}
 }

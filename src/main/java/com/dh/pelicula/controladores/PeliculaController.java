@@ -61,14 +61,18 @@ public class PeliculaController {
 	
 	@PostMapping("/editar") // Map ONLY POST Requests
 	public String editarPelicula(@ModelAttribute Pelicula movie, BindingResult result, Model model) {
-
-		
+			
 		try {
-			peliculaService.editarPelicula(movie);
-		} catch (Exception e) {
+			if(peliculaService.editarPelicula(movie)){	
+				return "home";
+			}else {
+				model.addAttribute("prohibido", "Acceso restringido, no tienes los permisos necesarios.");
+				return "restringido";
+			}	
+		}catch (Exception e) {
 			e.printStackTrace();
-		}
-		return "home";
+			return "";
+		}	
 	}
 	
 	@PostMapping("/find") // Map ONLY POST Requests
