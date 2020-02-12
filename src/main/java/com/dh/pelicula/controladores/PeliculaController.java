@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -91,4 +92,18 @@ public class PeliculaController {
 		
 	}
 	
+	/**
+	 * Borra una pelicula pasando un id de pelicula
+	 * @param id de la pelicula a borrar
+	 * @param model
+	 * @return la home
+	 */
+	@GetMapping("/delete/{id}")
+    public String borrarPelicula(@PathVariable("id") long id, Model model) {
+		//toda la logica, es decir todo el código que necesito para borrar la pelicula lo escribo en
+		//el experto de pelicula es decir en peliculaServiceImpl.
+		peliculaService.eliminarPelicula(id);
+        return "home";
+    }
+
 }

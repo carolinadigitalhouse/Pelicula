@@ -14,16 +14,13 @@ public class PeliculaServiceImpl implements PeliculaService{
 
 	@Autowired 
 	private PeliculaRepository peliculaRepository;
-
-	
 	@Override
 	public boolean agregar(Pelicula peli){
 		if (checkTituloAvailable(peli)) {
 			generadorNumeroRandom(peli);
 			peliculaRepository.save(peli);
 		}
-		return true;
-		
+		return true;		
 	}
 	@Override
 	public boolean editarPelicula(Pelicula movie) {
@@ -35,26 +32,32 @@ public class PeliculaServiceImpl implements PeliculaService{
 			return false;
 		}
 	}
-
 	@Override
 	public Pelicula buscarPelicula(Long id)  throws Exception{
 		Optional<Pelicula> pelicula= peliculaRepository.findById(id);
 		if (pelicula.isPresent()) {
 			throw new Exception("pelicula no disponible");
 		}
-
 		return pelicula.get();
 	}
-	
 	@Override
 	public Pelicula buscarPeliculaPorTitulo(String titulo) {
 		Pelicula peliFound = peliculaRepository.findTituloIs(titulo);
 		return peliFound;
 	}
-
+	@Override
+	public void eliminarPelicula(long id) {
+		//Voy a la BD a buscar la pelicula por id para borrarla
+		//Pero me puede pasar que esa pelicula no exista en la BD por eso
+		//puedo usar el metodo orElseThrow() para lanzar una exception. 
+		//En caso de que tengamos la exception debemos manejarla... se los dejo para que investiguen cómo hacerlo
+		//Despues les doy cómo vamos a manejar esa exception pero estaría ideal si investigan por su cuenta que podemos hacer en este caso
+		Pelicula peliABorrar = peliculaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalido Id:" + id));
+		peliculaRepository.delete(peliABorrar);    
+	}
 	private boolean checkTituloAvailable(Pelicula peli){
-		Pelicula peliFound = peliculaRepository.findTituloIs(peli.getTitulo()); // optional por el null
-		if (peliFound != null) {
+		Pelicula peliFound = peliculaRepository.findTituloIs(peli.getTitulo()); 
+		if (peliFound!=null) {
 			return false;
 		}
 		return true;
@@ -70,6 +73,5 @@ public class PeliculaServiceImpl implements PeliculaService{
 		Long b = peliOriginal.getRandom_num();
 		boolean resultado = (a.equals(b)) ? true: false;
 		return resultado;
-
 	}
 }

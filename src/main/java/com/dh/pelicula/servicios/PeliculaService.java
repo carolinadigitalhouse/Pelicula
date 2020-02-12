@@ -32,4 +32,6 @@ public interface PeliculaService {
 	 */
 	boolean agregar(Pelicula movie);
 
+	void eliminarPelicula(long id);
+
 }

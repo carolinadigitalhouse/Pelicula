@@ -30,12 +30,21 @@ h1 {
     font-size: 20px;
     color: #515860;
 }
+
 .text_field input{
 	margin-bottom: 4%;
-	}
-	.down_btn{
-	widht:300px;}
-.down_btn a{
+}
+	
+.btn-delete {
+	background-color: #e91e63 !important;
+	font: 400 13.3333px Arial;
+}
+
+.down_btn{
+	widht:300px;
+}
+
+.btn-submit, .down_btn a{
     display: inline-block;
     text-align: center;
     background-color: #edf74b;
