@@ -50,3 +50,4 @@ public interface PeliculaRepository extends CrudRepository<Pelicula, Long> {
 	@Query("select p from Pelicula p where p.categoria = ?1")
 	List<Pelicula> findCategoriaOrder(String categoria, Sort sort);
 }
+

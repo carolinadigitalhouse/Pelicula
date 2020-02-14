@@ -1,5 +1,6 @@
 package com.dh.pelicula.servicios.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class PeliculaServiceImpl implements PeliculaService{
 	}
 	@Override
 	public Pelicula buscarPeliculaPorTitulo(String titulo) {
-		Pelicula peliFound = peliculaRepository.findTituloIs(titulo);
+		Pelicula peliFound = peliculaRepository.findByTituloIs(titulo);
 		return peliFound;
 	}
 	@Override
@@ -55,8 +56,17 @@ public class PeliculaServiceImpl implements PeliculaService{
 		Pelicula peliABorrar = peliculaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalido Id:" + id));
 		peliculaRepository.delete(peliABorrar);    
 	}
+
+	
+	@Override
+	public List<Pelicula> buscarTodasLasPeliculas() {
+		List<Pelicula> peliculas = (List<Pelicula>) peliculaRepository.findAll();
+		return peliculas;
+	}
+
+
 	private boolean checkTituloAvailable(Pelicula peli){
-		Pelicula peliFound = peliculaRepository.findTituloIs(peli.getTitulo()); 
+		Pelicula peliFound = peliculaRepository.findByTituloIs(peli.getTitulo()); 
 		if (peliFound!=null) {
 			return false;
 		}

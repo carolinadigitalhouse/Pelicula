@@ -1,5 +1,7 @@
 package com.dh.pelicula.servicios;
 
+import java.util.List;
+
 import com.dh.pelicula.entidades.Pelicula;
 
 public interface PeliculaService {
@@ -33,5 +35,7 @@ public interface PeliculaService {
 	boolean agregar(Pelicula movie);
 
 	void eliminarPelicula(long id);
+
+	List<Pelicula> buscarTodasLasPeliculas();
 
 }
