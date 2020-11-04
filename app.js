@@ -11,6 +11,8 @@ app.get('/', (req,res)=>{
     res.sendFile(__dirname + '/views/index.html');
 });
 
+
+
 app.post('/', (req,res)=>{
     res.sendFile(__dirname + '/views/index.html');
 });
